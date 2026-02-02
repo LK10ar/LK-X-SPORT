@@ -4,54 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LK-X SPORT</title>
-    <link rel="icon" type="image/png" href="sport.png">
+    <link rel="icon" type="image/png" href="c:\Users\leo\Desktop\salle\sport.png">
     
     <style>
         body { background: #0c0c0c; color: #eee; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; scroll-behavior: smooth; }
         
-        /* HEADER AVEC LOGO À DROITE */
         header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 15px 20px; 
-            border-bottom: 1px solid #333; 
-            position: sticky;
-            top: 0;
-            background: #0c0c0c;
-            z-index: 100;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 15px; 
+            border-bottom: 1px solid #333; position: sticky; top: 0; background: #0c0c0c; z-index: 100; height: 90px;
         }
-       /* MODIFICATION DE LA TAILLE DU LOGO */
-.header-logo { 
-    width: 75px;  /* Augmente cette valeur selon tes besoins (ex: 80px, 100px) */
-    height: 75px; /* Doit être identique à width pour garder le ratio si c'est un carré */
-    object-fit: contain; 
-}
-        h1 { color: #ff4500; margin: 0; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; flex-grow: 1; text-align: center; }
 
-        /* BOUTON FLÈCHE RETOUR EN HAUT */
+        .burger-menu { width: 40px; cursor: pointer; z-index: 1001; }
+        .burger-bar { width: 22px; height: 2px; background-color: #ff4500; margin: 5px 0; }
+
+        h1 { 
+            color: #ff4500; margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; 
+            position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; text-align: center;
+        }
+        .header-logo { width: 90px; height: 90px; object-fit: contain; }
+
         #back-to-top {
             position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
             background: #ff4500; color: white; border-radius: 50%; display: flex;
             align-items: center; justify-content: center; font-size: 1.5rem;
             cursor: pointer; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
-            z-index: 999; border: none; transition: 0.3s;
+            z-index: 999; border: none;
         }
-        #back-to-top:active { transform: scale(0.9); }
 
-        .app-container { max-width: 600px; margin: auto; padding: 15px; }
-        
-        /* NAVIGATION BURGER */
-        .burger-menu { cursor: pointer; z-index: 1001; }
-        .burger-bar { width: 22px; height: 2px; background-color: #ff4500; margin: 5px 0; transition: 0.4s; }
-        .nav-days { position: fixed; top: 0; left: -100%; height: 100%; width: 260px; background: #0c0c0c; flex-direction: column; padding: 80px 20px; box-shadow: 2px 0 15px rgba(0,0,0,0.8); z-index: 1000; transition: 0.3s; display: flex; }
+        /* MENU AVEC BOUTON FERMER X */
+        .nav-days { 
+            position: fixed; top: 0; left: -100%; height: 100%; width: 260px; 
+            background: #0c0c0c; flex-direction: column; padding: 20px; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.8); z-index: 1000; transition: 0.3s; display: flex; 
+        }
         .nav-days.open { left: 0; }
+        
+        .close-menu {
+            align-self: flex-end; font-size: 2rem; color: #ff4500; cursor: pointer;
+            background: none; border: none; font-weight: bold; margin-bottom: 20px;
+        }
+
         .nav-btn { width: 100%; text-align: left; padding: 15px; background: #1a1a1a; color: #666; border: 1px solid #333; border-radius: 12px; margin-bottom: 10px; cursor: pointer; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; }
         .nav-btn.active { background: #ff4500; color: white; border-color: #ff4500; }
         .nav-btn.special { border-color: #00a2ff; color: #00a2ff; }
         .nav-btn.special.active { background: #00a2ff; color: white; }
 
-        /* SECTIONS & CARTES */
+        .app-container { max-width: 600px; margin: auto; padding: 15px; }
         .page-content { display: none; }
         .page-content.active { display: block; }
         .section-header { color: #ff4500; font-weight: bold; text-transform: uppercase; margin: 25px 0 15px 0; font-size: 1rem; border-left: 4px solid #ff4500; padding-left: 12px; }
@@ -64,14 +62,6 @@
         input[type="checkbox"] { width: 24px; height: 24px; accent-color: #ff4500; cursor: pointer; }
         .video-btn { text-decoration: none; font-size: 1.1rem; background: #1a1a1a; padding: 10px; border-radius: 10px; color: #eee; border: 1px solid #333; align-self: center; }
 
-        /* TABLEAU COMPLÉMENTS */
-        .supp-table-container { background: #111; border-radius: 15px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: #1a1a1a; color: #00a2ff; text-align: left; padding: 12px; text-transform: uppercase; border-bottom: 2px solid #222; }
-        td { padding: 12px; border-bottom: 1px solid #222; vertical-align: top; }
-        .prod-name { color: #fff; font-weight: bold; }
-
-        /* RÉGLAGES & TIMER */
         .setup-card { background: #111; border-radius: 20px; padding: 20px; border: 1px solid #333; margin-bottom: 25px; }
         .control-group { background: #1a1a1a; border-radius: 15px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #222; }
         .control-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: #888; }
@@ -81,29 +71,29 @@
 
         .timer-box { text-align: center; padding: 25px; background: #000; border-radius: 25px; margin-bottom: 25px; border: 1px solid #333; }
         .timer-val { font-size: 5.5rem; font-weight: bold; font-family: monospace; line-height: 1; margin: 15px 0; }
-        .btn-main { width: 100%; background: #ff4500; color: white; border: none; padding: 22px; border-radius: 18px; font-size: 1.3rem; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-main { width: 100%; background: #ff4500; color: white; border: none; padding: 22px; border-radius: 18px; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-blue { background: #00a2ff !important; }
 
-        @media (max-width: 600px) {
-            .open .burger-bar:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-            .open .burger-bar:nth-child(2) { opacity: 0; }
-            .open .burger-bar:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-        }
+        .supp-table-container { background: #111; border-radius: 15px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: #1a1a1a; color: #00a2ff; text-align: left; padding: 12px; text-transform: uppercase; border-bottom: 2px solid #222; }
+        td { padding: 12px; border-bottom: 1px solid #222; vertical-align: top; }
+        .prod-name { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="burger-menu" id="burger">
-        <div class="burger-bar"></div><div class="burger-bar"></div><div class="burger-bar"></div>
-    </div>
+    <div class="burger-menu" id="burger-open"><div class="burger-bar"></div><div class="burger-bar"></div><div class="burger-bar"></div></div>
     <h1>LK-X SPORT</h1>
-    <img src="sport.png" alt="Logo" class="header-logo">
+    <img src="c:\Users\leo\Desktop\salle\sport.png" alt="Logo" class="header-logo">
 </header>
 
 <button id="back-to-top" onclick="window.scrollTo(0,0)">▲</button>
 
 <div class="app-container">
     <nav class="nav-days" id="navDays">
+        <button class="close-menu" id="burger-close">×</button>
         <button class="nav-btn" onclick="showPage('day-1', event)">LUNDI</button>
         <button class="nav-btn" onclick="showPage('day-2', event)">MARDI</button>
         <button class="nav-btn" onclick="showPage('day-4', event)">JEUDI</button>
@@ -115,10 +105,7 @@
 
     <div id="training-ui">
         <div class="setup-card">
-            <div class="control-group">
-                <div class="control-label">SÉRIES</div>
-                <div class="counter"><button class="btn-round" onclick="updateVal('series', -1)">−</button><div class="counter-value" id="val-series">4</div><button class="btn-round" onclick="updateVal('series', 1)">+</button></div>
-            </div>
+            <div class="control-group"><div class="control-label">SÉRIES</div><div class="counter"><button class="btn-round" onclick="updateVal('series', -1)">−</button><div class="counter-value" id="val-series">4</div><button class="btn-round" onclick="updateVal('series', 1)">+</button></div></div>
             <div class="control-group"><div class="control-label" style="color:#00ff88">TRAVAIL</div><div class="counter"><button class="btn-round" onclick="updateVal('work', -5)">−</button><div class="counter-value" id="val-work">00:45</div><button class="btn-round" onclick="updateVal('work', 5)">+</button></div></div>
             <div class="control-group"><div class="control-label" style="color:#00a2ff">REPOS</div><div class="counter"><button class="btn-round" onclick="updateVal('rest', -5)">−</button><div class="counter-value" id="val-rest">01:30</div><button class="btn-round" onclick="updateVal('rest', 5)">+</button></div></div>
         </div>
@@ -174,22 +161,24 @@
                 <table>
                     <thead><tr><th>Produit</th><th>Pourquoi ?</th></tr></thead>
                     <tbody>
-                        <tr><td class="prod-name">Hyper Mass</td><td>Calories, glucides complexes, prise de masse propre.</td></tr>
-                        <tr><td class="prod-name">100% Creatine Monohydrate</td><td>Force brute et volume d'eau dans le muscle.</td></tr>
-                        <tr><td class="prod-name">Black Test</td><td>Le booster de testo le plus complet (ZMA, Fenugrec).</td></tr>
-                        <tr><td class="prod-name">AAKG 1000</td><td>Pour dilater les vaisseaux et être veineux.</td></tr>
-                        <tr><td class="prod-name">Black Blood NOX+</td><td>Pré-workout ultime pour l'énergie et la vascularité.</td></tr>
-                        <tr><td class="prod-name">TST + GH</td><td>Pour l'optimisation hormonale nocturne.</td></tr>
+                        <tr><td class="prod-name">Hyper Mass</td><td>Calories et glucides pour la prise de masse.</td></tr>
+                        <tr><td class="prod-name">100% Creatine Monohydrate</td><td>Force brute et volume musculaire.</td></tr>
+                        <tr><td class="prod-name">Black Test</td><td>Optimisation hormonale naturelle.</td></tr>
+                        <tr><td class="prod-name">Beta Alanine</td><td>Endurance et retard de l'acidité.</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="section-header blue">📅 PLANNING DE PRISE QUOTIDIEN</div>
-            <div class="item-card"><div class="item-info"><span class="item-name">☀️ Le Matin (Au réveil)</span><span class="item-desc">Hyper Mass : 1 shaker (eau ou lait d'avoine).</span><span class="highlight-why">Pourquoi : Recharger muscles et stopper le catabolisme.</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">🕛 Le Midi (Pendant le repas)</span><span class="item-desc">Black Test : 3 gélules.</span><span class="highlight-why">Pourquoi : Maintenir taux de testostérone naturelle au maximum.</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">🚀 Avant Training (30 min)</span><span class="item-desc">Black Blood NOX+ (1 dose) + AAKG 1000 (2-3 tab).</span><span class="highlight-why">Pourquoi : Cocktail veineux et focus total pour arracher les barres.</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">💪 Après Training (Immédiat)</span><span class="item-desc">Hyper Mass : 1 shaker + Créatine : 5g dedans.</span><span class="highlight-why">Pourquoi : Fenêtre métabolique pour reconstruire.</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">🌙 Le Soir (Coucher)</span><span class="item-desc">TST + GH : 1 dose.</span><span class="highlight-why">Pourquoi : Optimise l'hormone de croissance pendant le sommeil.</span></div></div>
+            <div class="section-header blue">📅 TON PLANNING DE PRISE (61 KG)</div>
+            <div class="item-card"><div class="item-info"><span class="item-name">☀️ Le Matin (Au réveil)</span><span class="item-desc">Hyper Mass : 1 shaker.</span><span class="highlight-why">Pourquoi : Après une nuit de jeûne, ton corps a besoin de calories et de glucides pour ne pas piocher dans tes muscles. C'est la base de ta prise de masse.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">🕛 Le Midi (Pendant le repas)</span><span class="item-desc">Black Test : 3 gélules.</span><span class="highlight-why">Pourquoi : Le prendre au milieu du repas permet une meilleure absorption des extraits de plantes et du zinc. Ça prépare ton terrain hormonal pour la journée et la nuit.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">🚀 Avant l'Entraînement (20-30 min avant)</span><span class="item-desc">Beta Alanine : 1 dose (2-4g selon ton produit).</span><span class="highlight-why">Pourquoi : C'est ce qui va te donner de l'endurance musculaire. Elle permet de retarder l'acidité dans les muscles pour faire ces 2-3 répétitions de plus au curl qui font la différence.<br>Note : Il est normal de ressentir des petits picotements sur la peau, c'est signe que ça agit !</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">💪 Après l'Entraînement (Immédiatement)</span><span class="item-desc">Hyper Mass : 1 shaker + Créatine Monohydrate : Ajoute 5g directement dans ton shaker.</span><span class="highlight-why">Pourquoi : C'est le moment le plus important. Les glucides du gainer vont créer un pic d'insuline qui va "transporter" la créatine et les protéines directement dans tes fibres musculaires détruites par la séance.</span></div></div>
+
+            <div class="section-header blue">💡 Conseils pour tes 2 mois :</div>
+            <div class="item-card"><div class="item-info"><span class="item-name">Jours de Repos</span><span class="item-desc">Continue de prendre l'Hyper Mass le matin, le Black Test le midi et les 5g de Créatine (dans un verre d'eau ou un shaker). Tu peux arrêter la Beta Alanine les jours sans sport.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">Mélange</span><span class="item-desc">Ne mets pas la créatine dans de l'eau bouillante, mélange-la bien dans ton shaker froid.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">Eau</span><span class="item-desc">Avec la créatine, tu dois boire 3 à 4 litres d'eau par jour. Si tu es déshydraté, tes muscles ne seront pas volumineux et tu ne seras pas veineux.</span></div></div>
         </section>
     </div>
 
@@ -199,16 +188,24 @@
             <div id="big-timer" class="timer-val" style="color:#ff4500">00:00</div>
             <div style="color:#555; font-size:0.85rem; font-weight:bold;">SÉRIE <span id="cur-series" style="color:#ff4500">0</span> / <span id="total-series-disp">4</span></div>
         </div>
-        <button id="main-btn" class="btn-main">Lancer la série</button>
+        <div style="display: flex; gap: 10px;">
+            <button id="main-btn" class="btn-main" style="flex: 2;">Lancer la série</button>
+            <button id="pause-btn" class="btn-main btn-blue" style="flex: 1; display: none;">⏸</button>
+        </div>
     </div>
 </div>
 
 <script>
     let config = { series: 4, work: 45, rest: 90 };
-    let timerId = null, timeLeft = 0, mode = "IDLE", currentSeries = 0;
-    const burger = document.getElementById('burger'), navDays = document.getElementById('navDays');
+    let timerId = null, timeLeft = 0, mode = "IDLE", currentSeries = 0, isPaused = false;
     
-    burger.addEventListener('click', () => { navDays.classList.toggle('open'); burger.classList.toggle('open'); });
+    const burgerOpen = document.getElementById('burger-open'), burgerClose = document.getElementById('burger-close');
+    const navDays = document.getElementById('navDays'), mainBtn = document.getElementById('main-btn');
+    const pauseBtn = document.getElementById('pause-btn'), statusTxt = document.getElementById('status'), timerDisp = document.getElementById('big-timer');
+
+    // LOGIQUE OUVRIR/FERMER MENU
+    burgerOpen.addEventListener('click', () => { navDays.classList.add('open'); });
+    burgerClose.addEventListener('click', () => { navDays.classList.remove('open'); });
 
     function showPage(id, event) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
@@ -218,7 +215,7 @@
         const isSupps = (id === 'page-supps');
         document.getElementById('training-ui').style.display = isSupps ? 'none' : 'block';
         document.getElementById('timer-ui').style.display = isSupps ? 'none' : 'block';
-        navDays.classList.remove('open'); burger.classList.remove('open');
+        navDays.classList.remove('open');
     }
 
     function showAllDays(event) {
@@ -226,7 +223,7 @@
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         event.currentTarget.classList.add('active');
         document.getElementById('training-ui').style.display = 'block'; document.getElementById('timer-ui').style.display = 'block';
-        navDays.classList.remove('open'); burger.classList.remove('open');
+        navDays.classList.remove('open');
     }
 
     function updateVal(type, mod) {
@@ -237,39 +234,47 @@
     function formatTime(s) { let m = Math.floor(s / 60), sec = s % 60; return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`; }
 
     function startTimer(type) {
-        mode = type; clearInterval(timerId);
-        const display = document.getElementById('big-timer'), status = document.getElementById('status');
+        mode = type; isPaused = false; clearInterval(timerId); pauseBtn.style.display = "block";
         if (type === "WORK") {
             currentSeries++; document.getElementById('cur-series').textContent = currentSeries;
-            timeLeft = config.work; status.textContent = "TRAVAIL";
-            status.style.color = "#00ff88"; display.style.color = "#ff4500";
+            timeLeft = config.work; statusTxt.textContent = "TRAVAIL"; statusTxt.style.color = "#00ff88"; timerDisp.style.color = "#ff4500";
         } else {
-            timeLeft = config.rest; status.textContent = "REPOS";
-            status.style.color = "#00a2ff"; display.style.color = "#00a2ff";
+            timeLeft = config.rest; statusTxt.textContent = "REPOS"; statusTxt.style.color = "#00a2ff"; timerDisp.style.color = "#00a2ff";
         }
-        display.textContent = formatTime(timeLeft);
+        runCountdown();
+    }
+
+    function runCountdown() {
+        clearInterval(timerId);
         timerId = setInterval(() => {
-            timeLeft--; display.textContent = formatTime(timeLeft);
-            if (timeLeft <= 0) {
-                clearInterval(timerId); new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play().catch(()=>{});
-                if (mode === "WORK") startTimer("REST"); else resetToIdle();
+            if (!isPaused) {
+                timeLeft--; timerDisp.textContent = formatTime(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play().catch(()=>{});
+                    if (mode === "WORK") startTimer("REST");
+                    else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); }
+                }
             }
         }, 1000);
     }
 
-    function resetToIdle() { 
-        clearInterval(timerId); mode = "IDLE"; 
-        const status = document.getElementById('status'), display = document.getElementById('big-timer');
-        status.textContent = "À TOI !"; status.style.color = "#666"; display.style.color = "#ff4500";
-        if (currentSeries >= config.series) currentSeries = 0; 
-    }
+    pauseBtn.addEventListener('click', () => { isPaused = !isPaused; pauseBtn.textContent = isPaused ? "▶" : "⏸"; statusTxt.textContent = isPaused ? "EN PAUSE" : (mode === "WORK" ? "TRAVAIL" : "REPOS"); });
 
-    document.getElementById('main-btn').addEventListener('click', () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else resetToIdle(); });
+    mainBtn.addEventListener('click', () => {
+        if (mode === "IDLE") startTimer("WORK");
+        else if (mode === "WORK") startTimer("REST");
+        else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); }
+    });
+
+    function resetToIdle() {
+        clearInterval(timerId); mode = "IDLE"; currentSeries = 0; isPaused = false; pauseBtn.style.display = "none";
+        statusTxt.textContent = "TERMINÉ !"; statusTxt.style.color = "#00ff88"; timerDisp.textContent = "00:00"; mainBtn.textContent = "LANCER LA SÉRIE";
+    }
 
     const today = new Date().getDay();
     const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
     if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
 </body>
-
 </html>
