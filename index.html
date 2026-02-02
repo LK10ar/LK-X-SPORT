@@ -4,81 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LK-X SPORT</title>
-    <link rel="icon" type="image/png" href="c:\Users\leo\Desktop\salle\sport.png">
-    
+    <link rel="icon" type="image/png" href="\sport.png">
     <style>
         body { background: #0c0c0c; color: #eee; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; scroll-behavior: smooth; }
-        
-        header { 
-            display: flex; align-items: center; justify-content: space-between; padding: 0 15px; 
-            border-bottom: 1px solid #333; position: sticky; top: 0; background: #0c0c0c; z-index: 100; height: 90px;
-        }
-
+        header { display: flex; align-items: center; justify-content: space-between; padding: 0 15px; border-bottom: 1px solid #333; position: sticky; top: 0; background: #0c0c0c; z-index: 100; height: 90px; }
         .burger-menu { width: 40px; cursor: pointer; z-index: 1001; }
         .burger-bar { width: 22px; height: 2px; background-color: #ff4500; margin: 5px 0; }
-
-        h1 { 
-            color: #ff4500; margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; 
-            position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; text-align: center;
-        }
+        h1 { color: #ff4500; margin: 0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; text-align: center; }
         .header-logo { width: 90px; height: 90px; object-fit: contain; }
-
-        #back-to-top {
-            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
-            background: #ff4500; color: white; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 1.5rem;
-            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
-            z-index: 999; border: none;
-        }
-
-        /* MENU AVEC BOUTON FERMER X */
-        .nav-days { 
-            position: fixed; top: 0; left: -100%; height: 100%; width: 260px; 
-            background: #0c0c0c; flex-direction: column; padding: 20px; 
-            box-shadow: 2px 0 15px rgba(0,0,0,0.8); z-index: 1000; transition: 0.3s; display: flex; 
-        }
+        #back-to-top { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #ff4500; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6); z-index: 999; border: none; }
+        .nav-days { position: fixed; top: 0; left: -100%; height: 100%; width: 260px; background: #0c0c0c; flex-direction: column; padding: 20px; box-shadow: 2px 0 15px rgba(0,0,0,0.8); z-index: 1000; transition: 0.3s; display: flex; }
         .nav-days.open { left: 0; }
-        
-        .close-menu {
-            align-self: flex-end; font-size: 2rem; color: #ff4500; cursor: pointer;
-            background: none; border: none; font-weight: bold; margin-bottom: 20px;
-        }
-
+        .close-menu { align-self: flex-end; font-size: 2rem; color: #ff4500; cursor: pointer; background: none; border: none; font-weight: bold; margin-bottom: 20px; }
         .nav-btn { width: 100%; text-align: left; padding: 15px; background: #1a1a1a; color: #666; border: 1px solid #333; border-radius: 12px; margin-bottom: 10px; cursor: pointer; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; }
         .nav-btn.active { background: #ff4500; color: white; border-color: #ff4500; }
         .nav-btn.special { border-color: #00a2ff; color: #00a2ff; }
         .nav-btn.special.active { background: #00a2ff; color: white; }
-
+        .nav-btn.recipe { border-color: #00ff88; color: #00ff88; }
+        .nav-btn.recipe.active { background: #00ff88; color: black; }
         .app-container { max-width: 600px; margin: auto; padding: 15px; }
         .page-content { display: none; }
         .page-content.active { display: block; }
         .section-header { color: #ff4500; font-weight: bold; text-transform: uppercase; margin: 25px 0 15px 0; font-size: 1rem; border-left: 4px solid #ff4500; padding-left: 12px; }
         .section-header.blue { color: #00a2ff; border-left-color: #00a2ff; }
+        .section-header.green { color: #00ff88; border-left-color: #00ff88; }
         .item-card { background: #111; display: flex; align-items: flex-start; padding: 18px; margin-bottom: 12px; border-radius: 15px; gap: 15px; border: 1px solid #222; }
         .item-info { flex-grow: 1; }
         .item-name { font-weight: bold; display: block; color: #fff; margin-bottom: 5px; font-size: 0.95rem; }
         .item-desc { font-size: 0.8rem; color: #888; line-height: 1.4; }
         .highlight-why { color: #00a2ff; font-weight: bold; display: block; margin-top: 5px; font-size: 0.75rem; }
+        .points-banner { background: #1a1a1a; padding: 10px; border-radius: 10px; border: 1px solid #00ff88; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .recipe-input-group { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; margin-bottom: 20px; }
+        .recipe-input-group label { display: block; font-size: 0.75rem; color: #888; margin-top: 10px; text-transform: uppercase; font-weight: bold; }
+        .recipe-input-group input, .recipe-input-group select { width: 100%; padding: 12px; margin: 5px 0 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
+        .cost-indicator { font-size: 0.7rem; color: #00ff88; margin-top: -5px; margin-bottom: 10px; display: block; }
+        .recipe-result-card { background: #1a1a1a; border-radius: 15px; margin-bottom: 15px; overflow: hidden; border: 1px solid #333; }
+        .recipe-result-card img { width: 100%; height: 200px; object-fit: cover; }
+        .recipe-result-info { padding: 15px; }
+        .btn-main { width: 100%; background: #ff4500; color: white; border: none; padding: 22px; border-radius: 18px; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .btn-blue { background: #00a2ff !important; }
+        .supp-table-container { background: #111; border-radius: 15px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: #1a1a1a; color: #00a2ff; text-align: left; padding: 12px; text-transform: uppercase; border-bottom: 2px solid #222; }
+        td { padding: 12px; border-bottom: 1px solid #222; vertical-align: top; }
+        .prod-name { color: #fff; font-weight: bold; }
         input[type="checkbox"] { width: 24px; height: 24px; accent-color: #ff4500; cursor: pointer; }
         .video-btn { text-decoration: none; font-size: 1.1rem; background: #1a1a1a; padding: 10px; border-radius: 10px; color: #eee; border: 1px solid #333; align-self: center; }
-
         .setup-card { background: #111; border-radius: 20px; padding: 20px; border: 1px solid #333; margin-bottom: 25px; }
         .control-group { background: #1a1a1a; border-radius: 15px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #222; }
         .control-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: #888; }
         .counter { display: flex; align-items: center; gap: 15px; }
         .btn-round { background: #333; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .counter-value { font-size: 1.3rem; font-weight: bold; min-width: 60px; text-align: center; }
-
         .timer-box { text-align: center; padding: 25px; background: #000; border-radius: 25px; margin-bottom: 25px; border: 1px solid #333; }
         .timer-val { font-size: 5.5rem; font-weight: bold; font-family: monospace; line-height: 1; margin: 15px 0; }
-        .btn-main { width: 100%; background: #ff4500; color: white; border: none; padding: 22px; border-radius: 18px; font-size: 1.1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        .btn-blue { background: #00a2ff !important; }
-
-        .supp-table-container { background: #111; border-radius: 15px; overflow: hidden; border: 1px solid #222; margin-bottom: 20px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { background: #1a1a1a; color: #00a2ff; text-align: left; padding: 12px; text-transform: uppercase; border-bottom: 2px solid #222; }
-        td { padding: 12px; border-bottom: 1px solid #222; vertical-align: top; }
-        .prod-name { color: #fff; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -86,7 +65,7 @@
 <header>
     <div class="burger-menu" id="burger-open"><div class="burger-bar"></div><div class="burger-bar"></div><div class="burger-bar"></div></div>
     <h1>LK-X SPORT</h1>
-    <img src="c:\Users\leo\Desktop\salle\sport.png" alt="Logo" class="header-logo">
+    <img src="\sport.png" alt="Logo" class="header-logo">
 </header>
 
 <button id="back-to-top" onclick="window.scrollTo(0,0)">▲</button>
@@ -101,6 +80,7 @@
         <button class="nav-btn" onclick="showPage('day-6', event)">SAMEDI</button>
         <button class="nav-btn all" onclick="showAllDays(event)">TOUT LE PLANNING</button>
         <button class="nav-btn special" onclick="showPage('page-supps', event)">💊 COMPLÉMENTS</button>
+        <button class="nav-btn recipe" onclick="showPage('page-recipes', event)">🍳 RECETTES</button>
     </nav>
 
     <div id="training-ui">
@@ -168,17 +148,108 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="section-header blue">📅 TON PLANNING DE PRISE (61 KG)</div>
             <div class="item-card"><div class="item-info"><span class="item-name">☀️ Le Matin (Au réveil)</span><span class="item-desc">Hyper Mass : 1 shaker.</span><span class="highlight-why">Pourquoi : Après une nuit de jeûne, ton corps a besoin de calories et de glucides pour ne pas piocher dans tes muscles. C'est la base de ta prise de masse.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">🕛 Le Midi (Pendant le repas)</span><span class="item-desc">Black Test : 3 gélules.</span><span class="highlight-why">Pourquoi : Le prendre au milieu du repas permet une meilleure absorption des extraits de plantes et du zinc. Ça prépare ton terrain hormonal pour la journée et la nuit.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">🚀 Avant l'Entraînement (20-30 min avant)</span><span class="item-desc">Beta Alanine : 1 dose (2-4g selon ton produit).</span><span class="highlight-why">Pourquoi : C'est ce qui va te donner de l'endurance musculaire. Elle permet de retarder l'acidité dans les muscles pour faire ces 2-3 répétitions de plus au curl qui font la différence.<br>Note : Il est normal de ressentir des petits picotements sur la peau, c'est signe que ça agit !</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">💪 Après l'Entraînement (Immédiatement)</span><span class="item-desc">Hyper Mass : 1 shaker + Créatine Monohydrate : Ajoute 5g directement dans ton shaker.</span><span class="highlight-why">Pourquoi : C'est le moment le plus important. Les glucides du gainer vont créer un pic d'insuline qui va "transporter" la créatine et les protéines directement dans tes fibres musculaires détruites par la séance.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">💪 Après l'Entraînement (Immédiatement)</span><span class="item-desc">Hyper Mass + 5g Créatine Monohydrate.</span><span class="highlight-why">Pourquoi : C'est le moment le plus important. Les glucides du gainer vont créer un pic d'insuline qui va "transporter" la créatine et les protéines directement dans tes fibres musculaires détruites par la séance.</span></div></div>
 
             <div class="section-header blue">💡 Conseils pour tes 2 mois :</div>
             <div class="item-card"><div class="item-info"><span class="item-name">Jours de Repos</span><span class="item-desc">Continue de prendre l'Hyper Mass le matin, le Black Test le midi et les 5g de Créatine (dans un verre d'eau ou un shaker). Tu peux arrêter la Beta Alanine les jours sans sport.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">Mélange</span><span class="item-desc">Ne mets pas la créatine dans de l'eau bouillante, mélange-la bien dans ton shaker froid.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">Eau</span><span class="item-desc">Avec la créatine, tu dois boire 3 à 4 litres d'eau par jour. Si tu es déshydraté, tes muscles ne seront pas volumineux et tu ne seras pas veineux.</span></div></div>
+        </section>
+
+        <section id="page-recipes" class="page-content">
+            <div class="section-header green">🍳 RECHERCHE DÉTAILLÉE & COÛT</div>
+            <div class="points-banner">
+                <span id="points-display" style="color:#00ff88">POINTS RESTANTS : 150.0 / 150</span>
+                <button onclick="resetPoints()" style="margin-left:10px; background:#333; color:white; border:none; padding:2px 8px; border-radius:5px; cursor:pointer;">RESET</button>
+            </div>
+
+            <div class="recipe-input-group" id="recipe-form">
+                <label>Nom du plat (query)</label>
+                <input type="text" id="recipe-query" placeholder="ex: Chicken, Pasta..." oninput="calculateLiveCost()">
+                <span class="cost-indicator">+ 1.0 pt</span>
+
+                <label>Nombre de résultats</label>
+                <select id="recipe-number" onchange="calculateLiveCost()">
+                    <option value="5">5 résultats (+ 0.1 pt)</option>
+                    <option value="10">10 résultats (+ 0.1 pt)</option>
+                    <option value="20">20 résultats (+ 0.1 pt)</option>
+                </select>
+
+                <div style="display:flex; gap:10px;">
+                    <div style="flex:1;">
+                        <label>Cuisine</label>
+                        <select id="recipe-cuisine" onchange="calculateLiveCost()">
+                            <option value="">Toutes</option>
+                            <option value="italian">Italienne</option>
+                            <option value="french">Française</option>
+                            <option value="american">Américaine</option>
+                            <option value="japanese">Japonaise</option>
+                            <option value="mexican">Mexicaine</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;">
+                        <label>Régime (Diet)</label>
+                        <select id="recipe-diet" onchange="calculateLiveCost()">
+                            <option value="">Aucun</option>
+                            <option value="paleo">Paleo</option>
+                            <option value="ketogenic">Keto</option>
+                            <option value="vegetarian">Veggie</option>
+                            <option value="low-carb">Bas Glucides</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label>Intolérances</label>
+                <select id="recipe-intolerances" onchange="calculateLiveCost()">
+                    <option value="">Aucune</option>
+                    <option value="dairy">Produits laitiers</option>
+                    <option value="egg">Oeuf</option>
+                    <option value="gluten">Gluten</option>
+                    <option value="peanut">Cacahuète</option>
+                </select>
+
+                <label>Type de Plat</label>
+                <select id="recipe-type" onchange="calculateLiveCost()">
+                    <option value="">Tous</option>
+                    <option value="main course">Plat principal</option>
+                    <option value="side dish">Accompagnement</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="breakfast">Petit Déjeuner</option>
+                    <option value="snack">Collation</option>
+                </select>
+
+                <label>Nutrition (Objectifs Masse)</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="number" id="min-calories" placeholder="Min Cal (ex: 800)" oninput="calculateLiveCost()">
+                    <input type="number" id="max-calories" placeholder="Max Cal" oninput="calculateLiveCost()">
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <input type="number" id="min-protein" placeholder="Min Prot (ex: 40)" oninput="calculateLiveCost()">
+                    <input type="number" id="max-protein" placeholder="Max Prot" oninput="calculateLiveCost()">
+                </div>
+                <span class="cost-indicator" id="nutrition-cost">+ 0.0 pt</span>
+
+                <label>Temps Max & Tri</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="number" id="max-time" placeholder="Temps Max (min)" oninput="calculateLiveCost()">
+                    <select id="recipe-sort" onchange="calculateLiveCost()">
+                        <option value="">Tri : Aucun</option>
+                        <option value="protein">Protéines</option>
+                        <option value="calories">Calories</option>
+                        <option value="time">Temps</option>
+                        <option value="fat">Lipides</option>
+                    </select>
+                </div>
+
+                <button class="btn-main" id="search-btn" style="background:#00ff88; color:black;" onclick="fetchRecipes()">
+                    RECHERCHER (COÛT : 1.10 PT)
+                </button>
+            </div>
+            <div id="recipes-results"></div>
         </section>
     </div>
 
@@ -188,44 +259,118 @@
             <div id="big-timer" class="timer-val" style="color:#ff4500">00:00</div>
             <div style="color:#555; font-size:0.85rem; font-weight:bold;">SÉRIE <span id="cur-series" style="color:#ff4500">0</span> / <span id="total-series-disp">4</span></div>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <button id="main-btn" class="btn-main" style="flex: 2;">Lancer la série</button>
-            <button id="pause-btn" class="btn-main btn-blue" style="flex: 1; display: none;">⏸</button>
-        </div>
+        <div style="display: flex; gap: 10px;"><button id="main-btn" class="btn-main" style="flex: 2;">Lancer la série</button><button id="pause-btn" class="btn-main btn-blue" style="flex: 1; display: none;">⏸</button></div>
     </div>
 </div>
 
 <script>
     let config = { series: 4, work: 45, rest: 90 };
     let timerId = null, timeLeft = 0, mode = "IDLE", currentSeries = 0, isPaused = false;
+    const apiKey = '01e9145495be4f8981102e39f54ac3f4';
+    let remainingPoints = localStorage.getItem('points') ? parseFloat(localStorage.getItem('points')) : 150.0;
+
+    // --- POINTS & RECETTES ---
+    function updatePoints() {
+        document.getElementById('points-display').textContent = `POINTS RESTANTS : ${remainingPoints.toFixed(2)} / 150`;
+        localStorage.setItem('points', remainingPoints);
+        if(remainingPoints < 5) document.getElementById('points-display').style.color = "#ff4500";
+        else document.getElementById('points-display').style.color = "#00ff88";
+    }
+    updatePoints();
+    function resetPoints() { remainingPoints = 150.0; updatePoints(); }
+
+    function calculateLiveCost() {
+        let cost = 1.0; 
+        cost += 0.1; 
+        const inputs = ['min-calories', 'max-calories', 'min-protein', 'max-protein', 'recipe-cuisine', 'recipe-diet', 'recipe-intolerances', 'recipe-type', 'max-time'];
+        inputs.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.value && el.value !== "") cost += 0.01;
+        });
+        document.getElementById('search-btn').textContent = `RECHERCHER (COÛT : ${cost.toFixed(2)} PT)`;
+        return cost;
+    }
+
+    async function fetchRecipes() {
+        const cost = calculateLiveCost();
+        if (remainingPoints < cost) { alert("Plus assez de points !"); return; }
+        const q = document.getElementById('recipe-query').value;
+        const n = document.getElementById('recipe-number').value;
+        const calMin = document.getElementById('min-calories').value;
+        const calMax = document.getElementById('max-calories').value;
+        const protMin = document.getElementById('min-protein').value;
+        const protMax = document.getElementById('max-protein').value;
+        const cuisine = document.getElementById('recipe-cuisine').value;
+        const diet = document.getElementById('recipe-diet').value;
+        const intolerance = document.getElementById('recipe-intolerances').value;
+        const type = document.getElementById('recipe-type').value;
+        const time = document.getElementById('max-time').value;
+        const sort = document.getElementById('recipe-sort').value;
+        const resultsDiv = document.getElementById('recipes-results');
+        resultsDiv.innerHTML = '<p style="text-align:center;">Recherche...</p>';
+
+        let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${q}&number=${n}&addRecipeNutrition=true`;
+        if(calMin) url += `&minCalories=${calMin}`;
+        if(calMax) url += `&maxCalories=${calMax}`;
+        if(protMin) url += `&minProtein=${protMin}`;
+        if(protMax) url += `&maxProtein=${protMax}`;
+        if(cuisine) url += `&cuisine=${cuisine}`;
+        if(diet) url += `&diet=${diet}`;
+        if(intolerance) url += `&intolerances=${intolerance}`;
+        if(type) url += `&type=${type}`;
+        if(time) url += `&maxReadyTime=${time}`;
+        if(sort) url += `&sort=${sort}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            remainingPoints -= cost; 
+            updatePoints();
+            resultsDiv.innerHTML = '';
+            if(!data.results || data.results.length === 0) { resultsDiv.innerHTML = '<p style="text-align:center; color:#ff4500;">Aucun résultat.</p>'; return; }
+            data.results.forEach(recipe => {
+                const c = recipe.nutrition.nutrients.find(n => n.name === "Calories").amount;
+                const p = recipe.nutrition.nutrients.find(n => n.name === "Protein").amount;
+                resultsDiv.innerHTML += `
+                    <div class="recipe-result-card"><img src="${recipe.image}">
+                        <div class="recipe-result-info"><span class="item-name">${recipe.title}</span><span class="item-desc" style="color:#00ff88;">${Math.round(c)} kcal | ${Math.round(p)}g Protéines</span>
+                            <button onclick="viewRecipe(${recipe.id}, '${recipe.title.replace(/'/g, "\\'")}')" class="nav-btn" style="margin-top:10px; color:#00ff88; border-color:#00ff88; width:auto;">VOIR ÉTAPES (-0.5 PT)</button>
+                        </div></div>`;
+            });
+        } catch (e) { resultsDiv.innerHTML = "Erreur API."; }
+    }
+
+    function viewRecipe(id, title) {
+        if (remainingPoints < 0.5) { alert("Plus de points !"); return; }
+        remainingPoints -= 0.5; updatePoints();
+        window.open(`https://spoonacular.com/recipes/${title.replace(/ /g, '-')}-${id}`, '_blank');
+    }
+
+    // --- NAVIGATION ---
+    const burgerOpen = document.getElementById('burger-open'), burgerClose = document.getElementById('burger-close'), navDays = document.getElementById('navDays');
+    burgerOpen.addEventListener('click', () => navDays.classList.add('open'));
+    burgerClose.addEventListener('click', () => navDays.classList.remove('open'));
     
-    const burgerOpen = document.getElementById('burger-open'), burgerClose = document.getElementById('burger-close');
-    const navDays = document.getElementById('navDays'), mainBtn = document.getElementById('main-btn');
-    const pauseBtn = document.getElementById('pause-btn'), statusTxt = document.getElementById('status'), timerDisp = document.getElementById('big-timer');
-
-    // LOGIQUE OUVRIR/FERMER MENU
-    burgerOpen.addEventListener('click', () => { navDays.classList.add('open'); });
-    burgerClose.addEventListener('click', () => { navDays.classList.remove('open'); });
-
     function showPage(id, event) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        if(event) event.currentTarget.classList.add('active');
-        const isSupps = (id === 'page-supps');
-        document.getElementById('training-ui').style.display = isSupps ? 'none' : 'block';
-        document.getElementById('timer-ui').style.display = isSupps ? 'none' : 'block';
         navDays.classList.remove('open');
+        const isTraining = (id.startsWith('day-'));
+        document.getElementById('training-ui').style.display = isTraining ? 'block' : 'none';
+        document.getElementById('timer-ui').style.display = isTraining ? 'block' : 'none';
     }
 
     function showAllDays(event) {
-        document.querySelectorAll('.page-content').forEach(p => { if(p.id !== 'page-supps') p.classList.add('active'); else p.classList.remove('active'); });
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-        document.getElementById('training-ui').style.display = 'block'; document.getElementById('timer-ui').style.display = 'block';
+        document.querySelectorAll('.page-content').forEach(p => {
+            if(p.id.startsWith('day-')) p.classList.add('active');
+            else p.classList.remove('active');
+        });
         navDays.classList.remove('open');
+        document.getElementById('training-ui').style.display = 'none';
+        document.getElementById('timer-ui').style.display = 'none';
     }
 
+    // --- LOGIQUE DU CHRONOMÈTRE (MODIFIÉ) ---
     function updateVal(type, mod) {
         if (type === 'series') { config.series = Math.max(1, config.series + mod); document.getElementById('val-series').textContent = config.series; document.getElementById('total-series-disp').textContent = config.series; }
         else { config[type] = Math.max(5, config[type] + mod); document.getElementById(`val-${type}`).textContent = formatTime(config[type]); }
@@ -234,46 +379,56 @@
     function formatTime(s) { let m = Math.floor(s / 60), sec = s % 60; return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`; }
 
     function startTimer(type) {
-        mode = type; isPaused = false; clearInterval(timerId); pauseBtn.style.display = "block";
+        mode = type; 
+        isPaused = false; 
+        clearInterval(timerId); 
+        document.getElementById('pause-btn').style.display = "block";
+        const timerDisplay = document.getElementById('big-timer');
+
         if (type === "WORK") {
-            currentSeries++; document.getElementById('cur-series').textContent = currentSeries;
-            timeLeft = config.work; statusTxt.textContent = "TRAVAIL"; statusTxt.style.color = "#00ff88"; timerDisp.style.color = "#ff4500";
+            currentSeries++; 
+            document.getElementById('cur-series').textContent = currentSeries; 
+            timeLeft = config.work; 
+            document.getElementById('status').textContent = "TRAVAIL";
+            timerDisplay.style.color = "#ff4500"; // Orange pour le travail
         } else {
-            timeLeft = config.rest; statusTxt.textContent = "REPOS"; statusTxt.style.color = "#00a2ff"; timerDisp.style.color = "#00a2ff";
+            timeLeft = config.rest; 
+            document.getElementById('status').textContent = "REPOS";
+            timerDisplay.style.color = "#00a2ff"; // BLEU pour le repos
         }
         runCountdown();
     }
 
     function runCountdown() {
         clearInterval(timerId);
-        timerId = setInterval(() => {
-            if (!isPaused) {
-                timeLeft--; timerDisp.textContent = formatTime(timeLeft);
-                if (timeLeft <= 0) {
-                    clearInterval(timerId);
-                    new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play().catch(()=>{});
-                    if (mode === "WORK") startTimer("REST");
-                    else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); }
-                }
-            }
+        timerId = setInterval(() => { 
+            if (!isPaused) { 
+                timeLeft--; 
+                document.getElementById('big-timer').textContent = formatTime(timeLeft); 
+                if (timeLeft <= 0) { 
+                    clearInterval(timerId); 
+                    if (mode === "WORK") startTimer("REST"); 
+                    else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); } 
+                } 
+            } 
         }, 1000);
     }
 
-    pauseBtn.addEventListener('click', () => { isPaused = !isPaused; pauseBtn.textContent = isPaused ? "▶" : "⏸"; statusTxt.textContent = isPaused ? "EN PAUSE" : (mode === "WORK" ? "TRAVAIL" : "REPOS"); });
-
-    mainBtn.addEventListener('click', () => {
-        if (mode === "IDLE") startTimer("WORK");
-        else if (mode === "WORK") startTimer("REST");
-        else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); }
-    });
-
-    function resetToIdle() {
-        clearInterval(timerId); mode = "IDLE"; currentSeries = 0; isPaused = false; pauseBtn.style.display = "none";
-        statusTxt.textContent = "TERMINÉ !"; statusTxt.style.color = "#00ff88"; timerDisp.textContent = "00:00"; mainBtn.textContent = "LANCER LA SÉRIE";
+    document.getElementById('pause-btn').addEventListener('click', function() { isPaused = !isPaused; this.textContent = isPaused ? "▶" : "⏸"; });
+    document.getElementById('main-btn').addEventListener('click', () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); });
+    
+    function resetToIdle() { 
+        clearInterval(timerId); 
+        mode = "IDLE"; 
+        currentSeries = 0; 
+        document.getElementById('pause-btn').style.display = "none"; 
+        document.getElementById('status').textContent = "TERMINÉ !"; 
+        document.getElementById('big-timer').style.color = "#ff4500"; // Retour à l'orange
+        document.getElementById('big-timer').textContent = "00:00";
     }
 
-    const today = new Date().getDay();
-    const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
+    // --- INIT ---
+    const today = new Date().getDay(); const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
     if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
 </body>
