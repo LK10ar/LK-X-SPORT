@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LK-X SPORT</title>
-    <link rel="icon" type="image/png" href="sport.png">
+    <link rel="icon" type="image/png" href="c:\Users\leo\Desktop\salle\sport.png">
     <style>
         body { background: #0c0c0c; color: #eee; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 50px; scroll-behavior: smooth; }
+        
+        /* --- SPLASH SCREEN NOIR --- */
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+        #loading-screen img {
+            width: 250px; height: auto;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        #loading-text {
+            color: #ff4500; margin-top: 20px; font-weight: bold;
+            letter-spacing: 3px; text-transform: uppercase;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
         header { display: flex; align-items: center; justify-content: space-between; padding: 0 15px; border-bottom: 1px solid #333; position: sticky; top: 0; background: #0c0c0c; z-index: 100; height: 90px; }
         .burger-menu { width: 40px; cursor: pointer; z-index: 1001; }
         .burger-bar { width: 22px; height: 2px; background-color: #ff4500; margin: 5px 0; }
@@ -52,20 +74,33 @@
         .video-btn { text-decoration: none; font-size: 1.1rem; background: #1a1a1a; padding: 10px; border-radius: 10px; color: #eee; border: 1px solid #333; align-self: center; }
         .setup-card { background: #111; border-radius: 20px; padding: 20px; border: 1px solid #333; margin-bottom: 25px; }
         .control-group { background: #1a1a1a; border-radius: 15px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #222; }
-        .control-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: #ff4500; }
+        .control-label { font-weight: bold; font-size: 0.7rem; text-transform: uppercase; color: #888; }
         .counter { display: flex; align-items: center; gap: 15px; }
         .btn-round { background: #333; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .counter-value { font-size: 1.3rem; font-weight: bold; min-width: 60px; text-align: center; }
         .timer-box { text-align: center; padding: 25px; background: #000; border-radius: 25px; margin-bottom: 25px; border: 1px solid #333; }
         .timer-val { font-size: 5.5rem; font-weight: bold; font-family: monospace; line-height: 1; margin: 15px 0; }
+
+        #congrats-overlay {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            background: #ff4500; color: white; padding: 40px; border-radius: 30px;
+            font-size: 2.5rem; font-weight: 900; z-index: 9999; text-align: center;
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.8); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #congrats-overlay.show { transform: translate(-50%, -50%) scale(1); }
     </style>
 </head>
 <body>
 
+<div id="loading-screen">
+    <img src="c:\Users\leo\Desktop\salle\sport.png" alt="Logo LK-X">
+    <div id="loading-text">Chargement LK-X SPORT...</div>
+</div>
+
 <header>
     <div class="burger-menu" id="burger-open"><div class="burger-bar"></div><div class="burger-bar"></div><div class="burger-bar"></div></div>
     <h1>LK-X SPORT</h1>
-    <img src="sport.png" alt="Logo" class="header-logo">
+    <img src="c:\Users\leo\Desktop\salle\sport.png" alt="Logo" class="header-logo">
 </header>
 
 <button id="back-to-top" onclick="window.scrollTo(0,0)">▲</button>
@@ -99,6 +134,7 @@
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Développé assis machine : 3 x 10 reps.</span></div><a href="https://www.youtube.com/results?search_query=chest+press+machine" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Barre au front (EZ) : 4 x 8-10 reps.</span></div><a href="https://www.youtube.com/results?search_query=skullcrusher+ez+bar" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">V-SHAPE : Relevé de jambes + Haltère : 4 x 12 reps.</span></div><a href="https://www.youtube.com/results?search_query=hanging+leg+raise" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
         <section id="day-2" class="page-content">
@@ -108,6 +144,7 @@
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Tirage horizontal : 3 x 10 reps.</span></div><a href="https://www.youtube.com/results?search_query=seated+row" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">CURL HALTÈRES : 4 x 6-8 reps.</span></div><a href="https://www.youtube.com/results?search_query=dumbbell+curl" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">V-SHAPE : Crunch poulie haute : 4 x 10 reps.</span></div><a href="https://www.youtube.com/results?search_query=cable+crunch" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
         <section id="day-4" class="page-content">
@@ -117,6 +154,7 @@
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Écartés poulie vis-à-vis : 3 x 12 reps.</span></div><a href="https://www.youtube.com/results?search_query=cable+flys" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Curl Marteau : 4 x 10 reps.</span></div><a href="https://www.youtube.com/results?search_query=hammer+curl" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">V-SHAPE : Relevé de genoux lent : 4 x 15 reps.</span></div><a href="https://www.youtube.com/results?search_query=knee+raise+form" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
         <section id="day-5" class="page-content">
@@ -126,17 +164,21 @@
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Leg Extension : 3 x 12 reps</span></div><a href="https://www.youtube.com/results?search_query=leg+extension+form" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Leg Curl allongé : 3 x 10 reps</span></div><a href="https://www.youtube.com/results?search_query=leg+curl+form" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Mollets à la presse : 4 x 15 reps.</span></div><a href="https://www.youtube.com/results?search_query=calf+press+form" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
         <section id="day-6" class="page-content">
             <div class="section-header">JOUR 6 : BRAS & V-SHAPE (Congestion)</div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">SS 1 : Curl Barre EZ + Extensions corde</span></div><a href="https://www.youtube.com/results?search_query=ez+curl+cable+pushdown" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">SS 2 : Curl Incliné + Kickback poulie</span></div><a href="https://www.youtube.com/results?search_query=incline+curl+kickback" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Curl Inversé (Barre EZ) : 3 x 12 reps.</span><span class="item-desc">Pour le dessus de l'avant-bras (brachio-radial).</span></div><a href="https://www.youtube.com/results?search_query=reverse+ez+bar+curl+form" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Extensions de poignets (Haltères) : 3 x 15 reps.</span><span class="item-desc">Pour le relief et les veines sur l'avant-bras.</span></div><a href="https://www.youtube.com/results?search_query=dumbbell+wrist+extension+form" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">V-SHAPE : Gainage Planche Lestée : 3 x 1 min</span></div><a href="https://www.youtube.com/results?search_query=weighted+plank" target="_blank" class="video-btn">🎬</a></div>
+            <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
         <section id="page-supps" class="page-content">
-            <div class="section-header blue">🛒 Ta Liste de Courses BioTechUSA</div>
+            <div class="section-header blue">🛒 Ta Liste de Courses BioTech USA</div>
             <div class="supp-table-container">
                 <table>
                     <thead><tr><th>Produit</th><th>Pourquoi ?</th></tr></thead>
@@ -145,19 +187,22 @@
                         <tr><td class="prod-name">100% Creatine Monohydrate</td><td>Force brute et volume musculaire.</td></tr>
                         <tr><td class="prod-name">Black Test</td><td>Optimisation hormonale naturelle.</td></tr>
                         <tr><td class="prod-name">Beta Alanine</td><td>Endurance et retard de l'acidité.</td></tr>
+                        <tr><td class="prod-name">Pre Workout SHOT</td><td>Congestion , endurance  et énergie .</td></tr>
                     </tbody>
                 </table>
             </div>
-            <div class="section-header blue">📅 TON PLANNING DE PRISE </div>
+            <div class="section-header blue">📅 TON PLANNING DE PRISE (61 KG)</div>
             <div class="item-card"><div class="item-info"><span class="item-name">☀️ Le Matin (Au réveil)</span><span class="item-desc">Hyper Mass : 1 shaker.</span><span class="highlight-why">Pourquoi : Après une nuit de jeûne, ton corps a besoin de calories et de glucides pour ne pas piocher dans tes muscles. C'est la base de ta prise de masse.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">🕛 Le Midi (Pendant le repas)</span><span class="item-desc">Black Test : 3 gélules.</span><span class="highlight-why">Pourquoi : Le prendre au milieu du repas permet une meilleure absorption des extraits de plantes et du zinc. Ça prépare ton terrain hormonal pour la journée et la nuit.</span></div></div>
-            <div class="item-card"><div class="item-info"><span class="item-name">🚀 Avant l'Entraînement (20-30 min avant)</span><span class="item-desc">Beta Alanine : 1 dose (2-4g selon ton produit).</span><span class="highlight-why">Pourquoi : C'est ce qui va te donner de l'endurance musculaire. Elle permet de retarder l'acidité dans les muscles pour faire ces 2-3 répétitions de plus au curl qui font la différence.<br>Note : Il est normal de ressentir des petits picotements sur la peau, c'est signe que ça agit !</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">🚀 Avant l'Entraînement (20-30 min avant)</span><span class="item-desc">Le Shot Pré-workout : (1500 mg Arginine + 1500 mg Beta-Alanine + 160 mg Caféine).<br>Tes 2 pilules de Beta-Alanine : (2000 mg).</span><span class="highlight-why">TOTAL : Tu as une dose de guerrier pour ne pas lâcher sur tes séries lourdes.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">💪 Après l'Entraînement (Immédiatement)</span><span class="item-desc">Hyper Mass + 5g Créatine Monohydrate.</span><span class="highlight-why">Pourquoi : C'est le moment le plus important. Les glucides du gainer vont créer un pic d'insuline qui va "transporter" la créatine et les protéines directement dans tes fibres musculaires détruites par la séance.</span></div></div>
-
             <div class="section-header blue">💡 Conseils pour tes 2 mois :</div>
             <div class="item-card"><div class="item-info"><span class="item-name">Jours de Repos</span><span class="item-desc">Continue de prendre l'Hyper Mass le matin, le Black Test le midi et les 5g de Créatine (dans un verre d'eau ou un shaker). Tu peux arrêter la Beta Alanine les jours sans sport.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">Mélange</span><span class="item-desc">Ne mets pas la créatine dans de l'eau bouillante, mélange-la bien dans ton shaker froid.</span></div></div>
             <div class="item-card"><div class="item-info"><span class="item-name">Eau</span><span class="item-desc">Avec la créatine, tu dois boire 3 à 4 litres d'eau par jour. Si tu es déshydraté, tes muscles ne seront pas volumineux et tu ne seras pas veineux.</span></div></div>
+            <div class="section-header blue">⚠️ Ce qu'il faut retenir :</div>
+            <div class="item-card"><div class="item-info"><span class="item-name">L'ÉCHEC</span><span class="item-desc">Comme on a dit, avec ce combo de pré-workout, tu vas avoir une patate de l'espace. Utilise cette énergie pour aller chercher l'échec technique sur la dernière série de chaque exercice.</span></div></div>
+            <div class="item-card"><div class="item-info"><span class="item-name">FLOTTE</span><span class="item-desc">Bois comme un trou (4L d'eau). La créatine et la caféine ensemble, ça pardonne pas sur l'hydratation.</span></div></div>
         </section>
 
         <section id="page-recipes" class="page-content">
@@ -166,88 +211,29 @@
                 <span id="points-display" style="color:#00ff88">POINTS RESTANTS : 150.0 / 150</span>
                 <button onclick="resetPoints()" style="margin-left:10px; background:#333; color:white; border:none; padding:2px 8px; border-radius:5px; cursor:pointer;">RESET</button>
             </div>
-
             <div class="recipe-input-group" id="recipe-form">
                 <label>Nom du plat (query)</label>
                 <input type="text" id="recipe-query" placeholder="ex: Chicken, Pasta..." oninput="calculateLiveCost()">
                 <span class="cost-indicator">+ 1.0 pt</span>
-
                 <label>Nombre de résultats</label>
                 <select id="recipe-number" onchange="calculateLiveCost()">
                     <option value="5">5 résultats (+ 0.1 pt)</option>
                     <option value="10">10 résultats (+ 0.1 pt)</option>
                     <option value="20">20 résultats (+ 0.1 pt)</option>
                 </select>
-
                 <div style="display:flex; gap:10px;">
-                    <div style="flex:1;">
-                        <label>Cuisine</label>
-                        <select id="recipe-cuisine" onchange="calculateLiveCost()">
-                            <option value="">Toutes</option>
-                            <option value="italian">Italienne</option>
-                            <option value="french">Française</option>
-                            <option value="american">Américaine</option>
-                            <option value="japanese">Japonaise</option>
-                            <option value="mexican">Mexicaine</option>
-                        </select>
-                    </div>
-                    <div style="flex:1;">
-                        <label>Régime (Diet)</label>
-                        <select id="recipe-diet" onchange="calculateLiveCost()">
-                            <option value="">Aucun</option>
-                            <option value="paleo">Paleo</option>
-                            <option value="ketogenic">Keto</option>
-                            <option value="vegetarian">Veggie</option>
-                            <option value="low-carb">Bas Glucides</option>
-                        </select>
-                    </div>
+                    <div style="flex:1;"><label>Cuisine</label><select id="recipe-cuisine" onchange="calculateLiveCost()"><option value="">Toutes</option><option value="italian">Italienne</option><option value="french">Française</option><option value="american">Américaine</option><option value="japanese">Japonaise</option><option value="mexican">Mexicaine</option></select></div>
+                    <div style="flex:1;"><label>Régime (Diet)</label><select id="recipe-diet" onchange="calculateLiveCost()"><option value="">Aucun</option><option value="paleo">Paleo</option><option value="ketogenic">Keto</option><option value="vegetarian">Veggie</option><option value="low-carb">Bas Glucides</option></select></div>
                 </div>
-
-                <label>Intolérances</label>
-                <select id="recipe-intolerances" onchange="calculateLiveCost()">
-                    <option value="">Aucune</option>
-                    <option value="dairy">Produits laitiers</option>
-                    <option value="egg">Oeuf</option>
-                    <option value="gluten">Gluten</option>
-                    <option value="peanut">Cacahuète</option>
-                </select>
-
-                <label>Type de Plat</label>
-                <select id="recipe-type" onchange="calculateLiveCost()">
-                    <option value="">Tous</option>
-                    <option value="main course">Plat principal</option>
-                    <option value="side dish">Accompagnement</option>
-                    <option value="dessert">Dessert</option>
-                    <option value="breakfast">Petit Déjeuner</option>
-                    <option value="snack">Collation</option>
-                </select>
-
-                <label>Nutrition (Objectifs Masse)</label>
-                <div style="display:flex; gap:10px;">
-                    <input type="number" id="min-calories" placeholder="Min Cal (ex: 800)" oninput="calculateLiveCost()">
-                    <input type="number" id="max-calories" placeholder="Max Cal" oninput="calculateLiveCost()">
-                </div>
-                <div style="display:flex; gap:10px;">
-                    <input type="number" id="min-protein" placeholder="Min Prot (ex: 40)" oninput="calculateLiveCost()">
-                    <input type="number" id="max-protein" placeholder="Max Prot" oninput="calculateLiveCost()">
-                </div>
+                <label>Intolérances</label><select id="recipe-intolerances" onchange="calculateLiveCost()"><option value="">Aucune</option><option value="dairy">Produits laitiers</option><option value="egg">Oeuf</option><option value="gluten">Gluten</option><option value="peanut">Cacahuète</option></select>
+                <label>Type de Plat</label><select id="recipe-type" onchange="calculateLiveCost()"><option value="">Tous</option><option value="main course">Plat principal</option><option value="side dish">Accompagnement</option><option value="dessert">Dessert</option><option value="breakfast">Petit Déjeuner</option><option value="snack">Collation</option></select>
+                <label>Nutrition</label>
+                <div style="display:flex; gap:10px;"><input type="number" id="min-calories" placeholder="Min Cal" oninput="calculateLiveCost()"><input type="number" id="max-calories" placeholder="Max Cal" oninput="calculateLiveCost()"></div>
+                <div style="display:flex; gap:10px;"><input type="number" id="min-protein" placeholder="Min Prot" oninput="calculateLiveCost()"><input type="number" id="max-protein" placeholder="Max Prot" oninput="calculateLiveCost()"></div>
                 <span class="cost-indicator" id="nutrition-cost">+ 0.0 pt</span>
-
-                <label>Temps Max & Tri</label>
-                <div style="display:flex; gap:10px;">
-                    <input type="number" id="max-time" placeholder="Temps Max (min)" oninput="calculateLiveCost()">
-                    <select id="recipe-sort" onchange="calculateLiveCost()">
-                        <option value="">Tri : Aucun</option>
-                        <option value="protein">Protéines</option>
-                        <option value="calories">Calories</option>
-                        <option value="time">Temps</option>
-                        <option value="fat">Lipides</option>
-                    </select>
-                </div>
-
-                <button class="btn-main" id="search-btn" style="background:#00ff88; color:black;" onclick="fetchRecipes()">
-                    RECHERCHER (COÛT : 1.10 PT)
-                </button>
+                <label>Temps & Tri</label>
+                <div style="display:flex; gap:10px;"><input type="number" id="max-time" placeholder="Max Min" oninput="calculateLiveCost()"><select id="recipe-sort" onchange="calculateLiveCost()"><option value="">Tri : Aucun</option><option value="protein">Protéines</option><option value="calories">Calories</option><option value="time">Temps</option><option value="fat">Lipides</option></select></div>
+                <button class="btn-main" id="search-btn" style="background:#00ff88; color:black; margin-top:15px;" onclick="fetchRecipes()">RECHERCHER (COÛT : 1.10 PT)</button>
             </div>
             <div id="recipes-results"></div>
         </section>
@@ -263,30 +249,37 @@
     </div>
 </div>
 
+<div id="congrats-overlay">BRAVO tu as fini 👍</div>
+
 <script>
+    // --- SPLASH SCREEN LOGIC ---
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const loader = document.getElementById('loading-screen');
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
+            }
+        }, 2500); // Reste affiché 2.5 secondes
+    });
+
     let config = { series: 4, work: 45, rest: 90 };
     let timerId = null, timeLeft = 0, mode = "IDLE", currentSeries = 0, isPaused = false;
     const apiKey = '01e9145495be4f8981102e39f54ac3f4';
     let remainingPoints = localStorage.getItem('points') ? parseFloat(localStorage.getItem('points')) : 150.0;
 
-    // --- POINTS & RECETTES ---
     function updatePoints() {
         document.getElementById('points-display').textContent = `POINTS RESTANTS : ${remainingPoints.toFixed(2)} / 150`;
         localStorage.setItem('points', remainingPoints);
-        if(remainingPoints < 5) document.getElementById('points-display').style.color = "#ff4500";
-        else document.getElementById('points-display').style.color = "#00ff88";
+        document.getElementById('points-display').style.color = remainingPoints < 5 ? "#ff4500" : "#00ff88";
     }
     updatePoints();
     function resetPoints() { remainingPoints = 150.0; updatePoints(); }
 
     function calculateLiveCost() {
-        let cost = 1.0; 
-        cost += 0.1; 
+        let cost = 1.0; cost += 0.1;
         const inputs = ['min-calories', 'max-calories', 'min-protein', 'max-protein', 'recipe-cuisine', 'recipe-diet', 'recipe-intolerances', 'recipe-type', 'max-time'];
-        inputs.forEach(id => {
-            const el = document.getElementById(id);
-            if (el && el.value && el.value !== "") cost += 0.01;
-        });
+        inputs.forEach(id => { if (document.getElementById(id) && document.getElementById(id).value !== "") cost += 0.01; });
         document.getElementById('search-btn').textContent = `RECHERCHER (COÛT : ${cost.toFixed(2)} PT)`;
         return cost;
     }
@@ -296,46 +289,21 @@
         if (remainingPoints < cost) { alert("Plus assez de points !"); return; }
         const q = document.getElementById('recipe-query').value;
         const n = document.getElementById('recipe-number').value;
-        const calMin = document.getElementById('min-calories').value;
-        const calMax = document.getElementById('max-calories').value;
-        const protMin = document.getElementById('min-protein').value;
-        const protMax = document.getElementById('max-protein').value;
-        const cuisine = document.getElementById('recipe-cuisine').value;
-        const diet = document.getElementById('recipe-diet').value;
-        const intolerance = document.getElementById('recipe-intolerances').value;
-        const type = document.getElementById('recipe-type').value;
-        const time = document.getElementById('max-time').value;
-        const sort = document.getElementById('recipe-sort').value;
         const resultsDiv = document.getElementById('recipes-results');
         resultsDiv.innerHTML = '<p style="text-align:center;">Recherche...</p>';
-
         let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${q}&number=${n}&addRecipeNutrition=true`;
-        if(calMin) url += `&minCalories=${calMin}`;
-        if(calMax) url += `&maxCalories=${calMax}`;
-        if(protMin) url += `&minProtein=${protMin}`;
-        if(protMax) url += `&maxProtein=${protMax}`;
-        if(cuisine) url += `&cuisine=${cuisine}`;
-        if(diet) url += `&diet=${diet}`;
-        if(intolerance) url += `&intolerances=${intolerance}`;
-        if(type) url += `&type=${type}`;
-        if(time) url += `&maxReadyTime=${time}`;
-        if(sort) url += `&sort=${sort}`;
-
+        if(document.getElementById('min-calories').value) url += `&minCalories=${document.getElementById('min-calories').value}`;
+        if(document.getElementById('min-protein').value) url += `&minProtein=${document.getElementById('min-protein').value}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
-            remainingPoints -= cost; 
-            updatePoints();
+            remainingPoints -= cost; updatePoints();
             resultsDiv.innerHTML = '';
             if(!data.results || data.results.length === 0) { resultsDiv.innerHTML = '<p style="text-align:center; color:#ff4500;">Aucun résultat.</p>'; return; }
             data.results.forEach(recipe => {
                 const c = recipe.nutrition.nutrients.find(n => n.name === "Calories").amount;
                 const p = recipe.nutrition.nutrients.find(n => n.name === "Protein").amount;
-                resultsDiv.innerHTML += `
-                    <div class="recipe-result-card"><img src="${recipe.image}">
-                        <div class="recipe-result-info"><span class="item-name">${recipe.title}</span><span class="item-desc" style="color:#00ff88;">${Math.round(c)} kcal | ${Math.round(p)}g Protéines</span>
-                            <button onclick="viewRecipe(${recipe.id}, '${recipe.title.replace(/'/g, "\\'")}')" class="nav-btn" style="margin-top:10px; color:#00ff88; border-color:#00ff88; width:auto;">VOIR ÉTAPES (-0.5 PT)</button>
-                        </div></div>`;
+                resultsDiv.innerHTML += `<div class="recipe-result-card"><img src="${recipe.image}"><div class="recipe-result-info"><span class="item-name">${recipe.title}</span><span class="item-desc" style="color:#00ff88;">${Math.round(c)} kcal | ${Math.round(p)}g Protéines</span><button onclick="viewRecipe(${recipe.id}, '${recipe.title.replace(/'/g, "\\'")}')" class="nav-btn" style="margin-top:10px; color:#00ff88; border-color:#00ff88; width:auto;">VOIR ÉTAPES (-0.5 PT)</button></div></div>`;
             });
         } catch (e) { resultsDiv.innerHTML = "Erreur API."; }
     }
@@ -346,31 +314,26 @@
         window.open(`https://spoonacular.com/recipes/${title.replace(/ /g, '-')}-${id}`, '_blank');
     }
 
-    // --- NAVIGATION ---
     const burgerOpen = document.getElementById('burger-open'), burgerClose = document.getElementById('burger-close'), navDays = document.getElementById('navDays');
-    burgerOpen.addEventListener('click', () => navDays.classList.add('open'));
-    burgerClose.addEventListener('click', () => navDays.classList.remove('open'));
-    
+    burgerOpen.onclick = () => navDays.classList.add('open');
+    burgerClose.onclick = () => navDays.classList.remove('open');
+
     function showPage(id, event) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         navDays.classList.remove('open');
-        const isTraining = (id.startsWith('day-'));
+        const isTraining = id.startsWith('day-');
         document.getElementById('training-ui').style.display = isTraining ? 'block' : 'none';
         document.getElementById('timer-ui').style.display = isTraining ? 'block' : 'none';
     }
 
     function showAllDays(event) {
-        document.querySelectorAll('.page-content').forEach(p => {
-            if(p.id.startsWith('day-')) p.classList.add('active');
-            else p.classList.remove('active');
-        });
+        document.querySelectorAll('.page-content').forEach(p => { if(p.id.startsWith('day-')) p.classList.add('active'); else p.classList.remove('active'); });
         navDays.classList.remove('open');
         document.getElementById('training-ui').style.display = 'none';
         document.getElementById('timer-ui').style.display = 'none';
     }
 
-    // --- LOGIQUE DU CHRONOMÈTRE (MODIFIÉ) ---
     function updateVal(type, mod) {
         if (type === 'series') { config.series = Math.max(1, config.series + mod); document.getElementById('val-series').textContent = config.series; document.getElementById('total-series-disp').textContent = config.series; }
         else { config[type] = Math.max(5, config[type] + mod); document.getElementById(`val-${type}`).textContent = formatTime(config[type]); }
@@ -379,60 +342,44 @@
     function formatTime(s) { let m = Math.floor(s / 60), sec = s % 60; return `${m.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`; }
 
     function startTimer(type) {
-        mode = type; 
-        isPaused = false; 
-        clearInterval(timerId); 
+        mode = type; isPaused = false; clearInterval(timerId);
         document.getElementById('pause-btn').style.display = "block";
-        const timerDisplay = document.getElementById('big-timer');
-
-        if (type === "WORK") {
-            currentSeries++; 
-            document.getElementById('cur-series').textContent = currentSeries; 
-            timeLeft = config.work; 
-            document.getElementById('status').textContent = "TRAVAIL";
-            timerDisplay.style.color = "#ff4500"; // Orange pour le travail
-        } else {
-            timeLeft = config.rest; 
-            document.getElementById('status').textContent = "REPOS";
-            timerDisplay.style.color = "#00a2ff"; // BLEU pour le repos
-        }
+        if (type === "WORK") { currentSeries++; document.getElementById('cur-series').textContent = currentSeries; timeLeft = config.work; document.getElementById('status').textContent = "TRAVAIL"; document.getElementById('big-timer').style.color = "#ff4500"; }
+        else { timeLeft = config.rest; document.getElementById('status').textContent = "REPOS"; document.getElementById('big-timer').style.color = "#00a2ff"; }
         runCountdown();
     }
 
     function runCountdown() {
         clearInterval(timerId);
-        timerId = setInterval(() => { 
-            if (!isPaused) { 
-                timeLeft--; 
-                document.getElementById('big-timer').textContent = formatTime(timeLeft); 
-                if (timeLeft <= 0) { 
-                    clearInterval(timerId); 
-                    if (mode === "WORK") startTimer("REST"); 
-                    else { if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); } 
-                } 
-            } 
-        }, 1000);
+        timerId = setInterval(() => { if (!isPaused) { timeLeft--; document.getElementById('big-timer').textContent = formatTime(timeLeft); if (timeLeft <= 0) { clearInterval(timerId); if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); } } }, 1000);
     }
 
-    document.getElementById('pause-btn').addEventListener('click', function() { isPaused = !isPaused; this.textContent = isPaused ? "▶" : "⏸"; });
-    document.getElementById('main-btn').addEventListener('click', () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); });
-    
-    function resetToIdle() { 
-        clearInterval(timerId); 
-        mode = "IDLE"; 
-        currentSeries = 0; 
-        document.getElementById('pause-btn').style.display = "none"; 
-        document.getElementById('status').textContent = "TERMINÉ !"; 
-        document.getElementById('big-timer').style.color = "#ff4500"; // Retour à l'orange
-        document.getElementById('big-timer').textContent = "00:00";
-    }
+    document.getElementById('pause-btn').onclick = function() { isPaused = !isPaused; this.textContent = isPaused ? "▶" : "⏸"; };
+    document.getElementById('main-btn').onclick = () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); };
 
-    // --- INIT ---
-    const today = new Date().getDay(); const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
+    function resetToIdle() { clearInterval(timerId); mode = "IDLE"; currentSeries = 0; document.getElementById('pause-btn').style.display = "none"; document.getElementById('status').textContent = "TERMINÉ !"; document.getElementById('big-timer').style.color = "#ff4500"; document.getElementById('big-timer').textContent = "00:00"; }
+
+    // --- MASSIVE CONFETTI LOGIC ---
+    document.querySelectorAll('.finish-check').forEach(check => {
+        check.addEventListener('change', function() {
+            if (this.checked) {
+                const overlay = document.getElementById('congrats-overlay');
+                overlay.classList.add('show');
+                for (let i = 0; i < 150; i++) {
+                    const confetti = document.createElement('div');
+                    const size = Math.random() * 8 + 6;
+                    confetti.style.cssText = `position:fixed; width:${size}px; height:${size}px; background:${['#ff4500','#00ff88','#00a2ff','#ffffff'][Math.floor(Math.random()*4)]}; top:-20px; left:${Math.random()*100}vw; z-index:10000; border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
+                    document.body.appendChild(confetti);
+                    confetti.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translate(${(Math.random()-0.5)*400}px, 100vh) rotate(${Math.random()*1000}deg)`, opacity: 0 }], { duration: 2000 + Math.random() * 2000, easing: 'ease-out' }).onfinish = () => confetti.remove();
+                }
+                setTimeout(() => { overlay.classList.remove('show'); this.checked = false; }, 4000);
+            }
+        });
+    });
+
+    const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
+    const today = new Date().getDay();
     if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
 </body>
 </html>
-
-
-
