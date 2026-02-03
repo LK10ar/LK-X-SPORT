@@ -441,8 +441,28 @@
         });
     });
 
-    const today = new Date().getDay(); const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
-    if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
+    // --- DÉTECTION DU JOUR AUTOMATIQUE ---
+const autoSelectDay = () => {
+    const today = new Date().getDay(); // 0 = Dimanche, 1 = Lundi, etc.
+    const dayMap = {
+        1: 'day-1', // Lundi
+        2: 'day-2', // Mardi
+        4: 'day-4', // Jeudi
+        5: 'day-5', // Vendredi
+        6: 'day-6'  // Samedi
+    };
+
+    if (dayMap[today]) {
+        showPage(dayMap[today]);
+    } else {
+        // Si on est Mercredi ou Dimanche (repos), on affiche les compléments
+        showPage('page-supps');
+    }
+};
+
+// Appeler la fonction au démarrage
+autoSelectDay();
+
 </script>
 </body>
 </html>
