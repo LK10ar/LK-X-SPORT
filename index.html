@@ -423,7 +423,7 @@
 
     function resetToIdle() { clearInterval(timerId); mode = "IDLE"; currentSeries = 0; document.getElementById('pause-btn').style.display = "none"; document.getElementById('status').textContent = "TERMINÉ !"; document.getElementById('big-timer').style.color = "#e60a83"; document.getElementById('big-timer').textContent = "00:00"; }
 
-    // --- MASSIVE CONFETTI LOGIC ---
+    / --- MASSIVE CONFETTI LOGIC ---
     document.querySelectorAll('.finish-check').forEach(check => {
         check.addEventListener('change', function() {
             if (this.checked) {
@@ -432,7 +432,7 @@
                 for (let i = 0; i < 150; i++) {
                     const confetti = document.createElement('div');
                     const size = Math.random() * 8 + 6;
-                    confetti.style.cssText = `position:fixed; width:${size}px; height:${size}px; background:${['#ff4500','#00ff88','#00a2ff','#ffffff'][Math.floor(Math.random()*4)]}; top:-20px; left:${Math.random()*100}vw; z-index:10000; border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
+                    confetti.style.cssText = `position:fixed; width:${size}px; height:${size}px; background:${['#e60a83','#00ff88','#00a2ff','#ffffff'][Math.floor(Math.random()*4)]}; top:-20px; left:${Math.random()*100}vw; z-index:10000; border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
                     document.body.appendChild(confetti);
                     confetti.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translate(${(Math.random()-0.5)*400}px, 100vh) rotate(${Math.random()*1000}deg)`, opacity: 0 }], { duration: 2000 + Math.random() * 2000, easing: 'ease-out' }).onfinish = () => confetti.remove();
                 }
@@ -441,28 +441,9 @@
         });
     });
 
-    // --- DÉTECTION DU JOUR AUTOMATIQUE ---
-const autoSelectDay = () => {
-    const today = new Date().getDay(); // 0 = Dimanche, 1 = Lundi, etc.
-    const dayMap = {
-        1: 'day-1', // Lundi
-        2: 'day-2', // Mardi
-        4: 'day-4', // Jeudi
-        5: 'day-5', // Vendredi
-        6: 'day-6'  // Samedi
-    };
-
-    if (dayMap[today]) {
-        showPage(dayMap[today]);
-    } else {
-        // Si on est Mercredi ou Dimanche (repos), on affiche les compléments
-        showPage('page-supps');
-    }
-};
-
-// Appeler la fonction au démarrage
-autoSelectDay();
-
+    const dayMap = {1:'day-1', 2:'day-2', 3:'day-3', 4:'day-4', 5:'day-5'};
+    const today = new Date().getDay();
+    if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
 </body>
 </html>
