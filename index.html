@@ -263,6 +263,28 @@
         }, 2500); // Reste affiché 2.5 secondes
     });
 
+    // --- AUDIO LOGIC ---
+    function playBellSound() {
+        try {
+            const context = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = context.createOscillator();
+            const gain = context.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(880, context.currentTime); 
+            osc.frequency.exponentialRampToValueAtTime(440, context.currentTime + 0.5);
+
+            gain.gain.setValueAtTime(0.5, context.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 1);
+
+            osc.connect(gain);
+            gain.connect(context.destination);
+
+            osc.start();
+            osc.stop(context.currentTime + 1);
+        } catch(e) { console.log("Audio not supported"); }
+    }
+
     let config = { series: 4, work: 45, rest: 90 };
     let timerId = null, timeLeft = 0, mode = "IDLE", currentSeries = 0, isPaused = false;
     const apiKey = '01e9145495be4f8981102e39f54ac3f4';
@@ -350,14 +372,22 @@
     }
 
     function runCountdown() {
-        clearInterval(timerId);
-        timerId = setInterval(() => { if (!isPaused) { timeLeft--; document.getElementById('big-timer').textContent = formatTime(timeLeft); if (timeLeft <= 0) { clearInterval(timerId); if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); } } }, 1000);
+        timerId = setInterval(() => { if (!isPaused) { timeLeft--; document.getElementById('big-timer').textContent = formatTime(timeLeft); if (timeLeft <= 0) { 
+            clearInterval(timerId); 
+            if (mode === "WORK") {
+                startTimer("REST");
+            } else {
+                playBellSound();
+                if (currentSeries < config.series) startTimer("WORK"); 
+                else resetToIdle();
+            }
+        } } }, 1000);
     }
 
-    document.getElementById('pause-btn').onclick = function() { isPaused = !isPaused; this.textContent = isPaused ? "▶" : "⏸"; };
-    document.getElementById('main-btn').onclick = () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); };
+    document.getElementById('pause-btn').addEventListener('click', function() { isPaused = !isPaused; this.textContent = isPaused ? "▶" : "⏸"; });
+    document.getElementById('main-btn').addEventListener('click', () => { if (mode === "IDLE") startTimer("WORK"); else if (mode === "WORK") startTimer("REST"); else if (currentSeries < config.series) startTimer("WORK"); else resetToIdle(); });
 
-    function resetToIdle() { clearInterval(timerId); mode = "IDLE"; currentSeries = 0; document.getElementById('pause-btn').style.display = "none"; document.getElementById('status').textContent = "TERMINÉ !"; document.getElementById('big-timer').style.color = "#ff4500"; document.getElementById('big-timer').textContent = "00:00"; }
+    function resetToIdle() { clearInterval(timerId); mode = "IDLE"; currentSeries = 0; document.getElementById('pause-btn').style.display = "none"; document.getElementById('status').textContent = "TERMINÉ !"; document.getElementById('big-timer').style.color = "#e60a83"; document.getElementById('big-timer').textContent = "00:00"; }
 
     // --- MASSIVE CONFETTI LOGIC ---
     document.querySelectorAll('.finish-check').forEach(check => {
@@ -368,7 +398,7 @@
                 for (let i = 0; i < 150; i++) {
                     const confetti = document.createElement('div');
                     const size = Math.random() * 8 + 6;
-                    confetti.style.cssText = `position:fixed; width:${size}px; height:${size}px; background:${['#ff4500','#00ff88','#00a2ff','#ffffff'][Math.floor(Math.random()*4)]}; top:-20px; left:${Math.random()*100}vw; z-index:10000; border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
+                    confetti.style.cssText = `position:fixed; width:${size}px; height:${size}px; background:${['#e60a83','#00ff88','#00a2ff','#ffffff'][Math.floor(Math.random()*4)]}; top:-20px; left:${Math.random()*100}vw; z-index:10000; border-radius:${Math.random() > 0.5 ? '50%' : '2px'};`;
                     document.body.appendChild(confetti);
                     confetti.animate([{ transform: 'translateY(0) rotate(0)', opacity: 1 }, { transform: `translate(${(Math.random()-0.5)*400}px, 100vh) rotate(${Math.random()*1000}deg)`, opacity: 0 }], { duration: 2000 + Math.random() * 2000, easing: 'ease-out' }).onfinish = () => confetti.remove();
                 }
@@ -377,7 +407,7 @@
         });
     });
 
-    const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
+    const dayMap = {1:'day-1', 2:'day-2', 3:'day-3', 4:'day-4', 5:'day-5'};
     const today = new Date().getDay();
     if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
