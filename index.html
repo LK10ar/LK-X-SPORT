@@ -219,7 +219,7 @@
             <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
-        <section id="day-0" class="page-content">
+        <section id="day-7" class="page-content">
             <div class="section-header" style="color:#00a2ff; border-left-color:#00a2ff">JOUR 7 : REPOS</div>
             <div class="item-card">
                 <div class="item-info">
@@ -315,7 +315,7 @@
                     loader.style.visibility = 'hidden'; 
                     // DETECTION AUTO DU JOUR APRES CHARGEMENT
                     const today = new Date().getDay(); 
-                    const dayMap = {1:'day-1', 2:'day-2', 3:'day-3', 4:'day-4', 5:'day-5', 6:'day-6', 0:'day-0'};
+                    const dayMap = {1:'day-1', 2:'day-2', 3:'day-3', 4:'day-4', 5:'day-5', 6:'day-6', 0:'day-7'};
                     showPage(dayMap[today] || 'page-supps');
                 }, 800);
             }
@@ -418,7 +418,7 @@
         navDays.classList.remove('open');
         
         // Cacher UI Timer si c'est REPOS ou autre page
-        const isTrainingDay = id.startsWith('day-') && id !== 'day-3' && id !== 'day-0';
+        const isTrainingDay = id.startsWith('day-') && id !== 'day-3' && id !== 'day-7';
         document.getElementById('training-ui').style.display = isTrainingDay ? 'block' : 'none';
         document.getElementById('timer-ui').style.display = isTrainingDay ? 'block' : 'none';
     }
