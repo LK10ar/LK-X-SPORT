@@ -118,9 +118,11 @@
         <button class="close-menu" id="burger-close">×</button>
         <button class="nav-btn" onclick="showPage('day-1', event)">LUNDI</button>
         <button class="nav-btn" onclick="showPage('day-2', event)">MARDI</button>
+        <button class="nav-btn" onclick="showPage('day-3', event)">MERCREDI</button>
         <button class="nav-btn" onclick="showPage('day-4', event)">JEUDI</button>
         <button class="nav-btn" onclick="showPage('day-5', event)">VENDREDI</button>
         <button class="nav-btn" onclick="showPage('day-6', event)">SAMEDI</button>
+        <button class="nav-btn" onclick="showPage('day-0', event)">DIMANCHE</button>
         <button class="nav-btn all" onclick="showAllDays(event)">TOUT LE PLANNING</button>
         <button class="nav-btn special" onclick="showPage('page-supps', event)">💊 COMPLÉMENTS</button>
         <button class="nav-btn recipe" onclick="showPage('page-recipes', event)">🍳 RECETTES</button>
@@ -176,6 +178,17 @@
             <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
         </section>
 
+        <section id="day-3" class="page-content">
+            <div class="section-header" style="color:#00a2ff; border-left-color:#00a2ff">JOUR 3 : REPOS</div>
+            <div class="item-card">
+                <div class="item-info">
+                    <span class="item-name">RÉCUPÉRATION TOTALE</span>
+                    <span class="item-desc">Dors bien, mange bien. Demain on rattaque fort !</span>
+                </div>
+                <span style="font-size: 1.5rem;">🔋</span>
+            </div>
+        </section>
+
         <section id="day-4" class="page-content">
             <div class="section-header">JOUR 4 : UPPER RAPEL (Finition)</div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Développé Incliné Haltères : 4 x 8 reps.</span></div><a href="https://www.youtube.com/results?search_query=incline+dumbbell+press" target="_blank" class="video-btn">🎬</a></div>
@@ -204,6 +217,17 @@
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">Extensions de poignets (Haltères) : 3 x 15 reps.</span><span class="item-desc">Pour le relief et les veines sur l'avant-bras.</span></div><a href="https://www.youtube.com/results?search_query=dumbbell+wrist+extension+form" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card"><input type="checkbox"><div class="item-info"><span class="item-name">V-SHAPE : Gainage Planche Lestée : 3 x 1 min</span></div><a href="https://www.youtube.com/results?search_query=weighted+plank" target="_blank" class="video-btn">🎬</a></div>
             <div class="item-card" style="border: 2px solid #00ff88; margin-top: 20px;"><input type="checkbox" class="finish-check"><div class="item-info"><span class="item-name" style="color: #00ff88; font-size: 1.2rem;">EXOS FINI !</span><span class="item-desc">Coche ici quand tu as tout donné !</span></div><span style="font-size: 1.5rem;">🏆</span></div>
+        </section>
+
+        <section id="day-0" class="page-content">
+            <div class="section-header" style="color:#00a2ff; border-left-color:#00a2ff">JOUR 7 : REPOS</div>
+            <div class="item-card">
+                <div class="item-info">
+                    <span class="item-name">RÉCUPÉRATION TOTALE</span>
+                    <span class="item-desc">Dors bien, mange bien. Demain on rattaque fort !</span>
+                </div>
+                <span style="font-size: 1.5rem;">🔋</span>
+            </div>
         </section>
 
         <section id="page-supps" class="page-content">
@@ -287,7 +311,13 @@
             const loader = document.getElementById('loading-screen');
             if(loader) {
                 loader.style.opacity = '0';
-                setTimeout(() => { loader.style.visibility = 'hidden'; }, 800);
+                setTimeout(() => { 
+                    loader.style.visibility = 'hidden'; 
+                    // DETECTION AUTO DU JOUR APRES CHARGEMENT
+                    const today = new Date().getDay(); 
+                    const dayMap = {1:'day-1', 2:'day-2', 3:'day-3', 4:'day-4', 5:'day-5', 6:'day-6', 0:'day-0'};
+                    showPage(dayMap[today] || 'page-supps');
+                }, 800);
             }
         }, 2500);
     });
@@ -329,6 +359,7 @@
         }
     }
 
+    // --- PAGE RECETTE (PAS TOUCHE AUX FONCTIONS) ---
     function updatePoints() {
         document.getElementById('points-display').textContent = `POINTS RESTANTS : ${remainingPoints.toFixed(2)} / 150`;
         localStorage.setItem('points', remainingPoints);
@@ -381,11 +412,15 @@
 
     function showPage(id, event) {
         document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
+        const target = document.getElementById(id);
+        if(target) target.classList.add('active');
+        
         navDays.classList.remove('open');
-        const isTraining = id.startsWith('day-');
-        document.getElementById('training-ui').style.display = isTraining ? 'block' : 'none';
-        document.getElementById('timer-ui').style.display = isTraining ? 'block' : 'none';
+        
+        // Cacher UI Timer si c'est REPOS ou autre page
+        const isTrainingDay = id.startsWith('day-') && id !== 'day-3' && id !== 'day-0';
+        document.getElementById('training-ui').style.display = isTrainingDay ? 'block' : 'none';
+        document.getElementById('timer-ui').style.display = isTrainingDay ? 'block' : 'none';
     }
 
     function showAllDays(event) {
@@ -440,11 +475,6 @@
             }
         });
     });
-
-    // --- AUTO SELECT DAY LOGIC ---
-    const today = new Date().getDay(); 
-    const dayMap = {1:'day-1', 2:'day-2', 4:'day-4', 5:'day-5', 6:'day-6'};
-    if(dayMap[today]) showPage(dayMap[today]); else showPage('page-supps');
 </script>
 </body>
 </html>
